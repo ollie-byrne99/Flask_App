@@ -8,7 +8,7 @@ def index():
     try:
         locations = Location.query.all()
         data = [l.json for l in locations]
-        return jsonify({"locations": data})
+        return jsonify({"locations": data}), 200
         
     except:
         raise exceptions.InternalServerError("We are working on it")
