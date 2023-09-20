@@ -9,6 +9,9 @@ python-dotenv = "*"
 flask-cors = "*"
 flask-sqlalchemy = "*"
 psycopg2 = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-watch = "*"
 
 [dev-packages]
 
@@ -18,3 +21,6 @@ python_version = "3.11"
 [scripts]
 dev = "flask run"
 seed-db = "python seed.py"
+test = "ptw -- --capture=tee-sys"
+coverage = "pytest --cov-report term-missing --cov=."
+
