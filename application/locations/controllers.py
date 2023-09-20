@@ -17,7 +17,6 @@ def create():
     try:
         name = request.json.values()
         new_location = Location(name=name)
-        # new_location = Location(name)
             
         db.session.add(new_location)
         db.session.commit()
