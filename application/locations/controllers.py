@@ -15,16 +15,24 @@ def index():
     
 def create():
     try:
-        name = request.json.values()
-        new_location = Location(name=name)
-            
+        data = request.json
+        attributes = [
+            "name", "address", "description", "date_posted", "start_date",
+            "end_date", "business_name", "contact_email", "contact_phone",
+            "price_per_day", "latitude", "longitude", "is_available"
+        ]
+
+        extracted_data = {attr: data.get(attr) for attr in attributes}
+
+        new_location = Location(**extracted_data)
+
         db.session.add(new_location)
         db.session.commit()
 
         return jsonify({"data": new_location.json}), 201
 
     except:
-        raise exceptions.BadRequest(f"We cannot process your request, age, name and catch_phrase are required and you only provided")
+        raise exceptions.InternalServerError("We cannot process your request.")
     
 
 def show(id):
